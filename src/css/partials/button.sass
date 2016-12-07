@@ -1,0 +1,61 @@
+.button
+  position: relative
+  outline: none
+  display: block
+  border: 0
+  margin: auto
+  padding: 15px 0
+  width: 60%
+  height: 3rem
+  font-size: 18px
+  font-weight: $bold
+  text-transform: uppercase
+  letter-spacing: .1em
+  background: $main
+  color: $white
+  cursor: pointer
+  &:hover
+    background: $main-dark
+  &.btn-loader
+    border-radius: 3rem
+    &:after
+      content: ""
+      position: absolute
+      top: 50%
+      left: 50%
+      margin-left: -1.25rem
+      margin-top: -1.25rem
+      width: 2.5rem
+      height: 2.5rem
+      border: 2px dotted #fff
+      border-radius: 50%
+      border-left: none
+      border-bottom: none
+      transition: opacity 0.1s 0.3s
+      opacity: 0
+    &.processing
+      width: 3rem
+      font-size: 0
+      cursor: auto
+      background: $main-dark
+      transition: width 300ms, font-size 50ms
+      &:after
+        animation: rotate 0.5s 0.4s infinite linear
+        opacity: 1
+      &.finished
+        animation-name: btn-magnify
+        animation-duration: 300ms
+        animation-delay: 300ms
+        animation-fill-mode: forwards
+        &:after
+          opacity: 0
+
+@keyframes rotate
+  to
+    transform: rotate(360deg)
+
+@keyframes btn-magnify
+  from
+    width: 3rem
+  to
+    width: 60%

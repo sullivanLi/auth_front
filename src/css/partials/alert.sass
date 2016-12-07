@@ -1,0 +1,17 @@
+.alert
+  height: 0px
+  width: 100%
+  background: #ae63e4
+  color: $white
+  font-size: 20px
+  padding: 10px
+  display: flex
+  justify-content: center
+  align-items: center
+  opacity: 0
+  transition: opacity
+  transition: height 400ms cubic-bezier(0.25, 0.39, 0.39, 2.01)
+  &.is-open
+    opacity: 1
+    height: 60px
+    margin-bottom: 4px

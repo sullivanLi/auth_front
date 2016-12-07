@@ -1,0 +1,44 @@
+.loader
+  position: absolute
+  top: 47%
+  left: 47%
+  display: inline-block
+
+  &:before, &:after
+    content: ''
+    display: block
+    background: #00ACC1
+    border-radius: 50%
+    height: 35px
+    width: 35px
+    position: absolute
+    top: 25px
+    left: 0px
+    animation:
+      duration: 2s
+      timing-function: ease-in-out
+      iteration-count: infinite
+
+  &:before
+    opacity: 0.7
+    animation-name: leftDot
+
+  &:after
+    opacity: 0.5
+    animation-name: rightDot
+
+@keyframes leftDot
+  25%
+    transform: translateX(-50%)
+  47.5%, 52.5%
+    transform: translateX(0)
+  75%
+    transform: translateX(50%)
+
+@keyframes rightDot
+  25%
+    transform: translateX(50%)
+  47.5%, 52.5%
+    transform: translateX(0)
+  75%
+    transform: translateX(-50%)

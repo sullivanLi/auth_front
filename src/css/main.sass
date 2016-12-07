@@ -1,0 +1,50 @@
+$state-bg: #13232f
+$gray-light: #a0b3b0
+$white: #ffffff
+$main: #63b6e4
+$main-light: lighten($main, 10%)
+$main-dark: darken($main, 10%)
+$thin: 300
+$normal: 400
+$bold: 600
+
+@import 'partials/loader.sass'
+@import 'partials/state.sass'
+@import 'partials/tab.sass'
+@import 'partials/input.sass'
+@import 'partials/button.sass'
+@import 'partials/alert.sass'
+
+*, *:before, *:after
+  box-sizing: border-box
+
+html
+  overflow-y: scroll
+
+body
+  background: #c1bdba
+  font-family: 'Titillium Web', sans-serif
+
+#app
+  overflow: hidden
+  max-width: 600px
+  min-width: 300px
+  margin: 40px auto
+
+.is-transitioned
+  .belt
+    transform: translateX(-50%)
+  .state-1
+    transform: scale(0.3) rotateY(-90deg)
+
+h1
+  text-align: center
+  color: $white
+  font-weight: $thin
+  margin: 0 0 40px
+
+.belt
+  width: 200%
+  display: flex
+  transition: transform 1s ease-in-out
+  perspective: 1000px
