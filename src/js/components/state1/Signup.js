@@ -1,5 +1,6 @@
 import React from 'react';
-let CheckInputData = require('../../utils.js').CheckInputData;
+import { CheckInputData } from '../../utils';
+import Server from '../../server';
 
 export default class Signup extends React.Component {
   render() {
@@ -7,20 +8,22 @@ export default class Signup extends React.Component {
       <div id="signup">
         <h1>Sign Up for Free</h1>
         <div class="alert"></div>
-        <input type="text" placeholder="Username"/>
-        <input type="password" placeholder="Password"/>
+        <input type="text" class="name" placeholder="Username"/>
+        <input type="password" class="password" placeholder="Password"/>
         <button type="submit" class="button btn-loader">Sign Up</button>
       </div>
     );
   }
 
   componentDidMount() {
-    let $login = $('#signup');
-    let $alert = $login.find('.alert');
-    let $button = $login.find('button');
+    let _component = this;
+    let $signup = $('#signup');
+    let $alert = $signup.find('.alert');
+    let $button = $signup.find('button');
     $button.on('click', function (e) {
       if (processing) return;
-      let msg = CheckInputData($login);
+      // check input data
+      let msg = CheckInputData($signup);
       $alert.removeClass('is-open');
       if (msg !== "") {
         $alert.text(msg);
@@ -28,7 +31,26 @@ export default class Signup extends React.Component {
         processing = false;
         return;
       }
+      // start processing
+      processing = true;
       $button.addClass("processing");
+      Server.signup($signup.find('.name').val(), $signup.find('.password').val(), (result) => {
+        $alert.text(result.message);
+        _component.showResult($alert, $button);
+      }, (error) => {
+        $alert.text(error.responseText);
+        _component.showResult($alert, $button);
+      });
     });
+  }
+
+  showResult($alert, $button) {
+    $alert.addClass('is-open');
+    $button.addClass("finished");
+    setTimeout(() => {
+      $button.removeClass("processing");
+      $button.removeClass("finished");
+      processing = false;
+    }, 600)
   }
 }

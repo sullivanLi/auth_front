@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 
 import State1 from './components/State1';
 import State2 from './components/State2';
+import Server from './server';
 
 class Main extends React.Component {
   render() {
@@ -21,6 +22,9 @@ class Main extends React.Component {
   componentDidMount() {
     $('.loader').css('display', 'none');
     $('.container').css('display', 'flex');
+    if(Server.loggedIn()) {
+      $('#app').addClass("is-transitioned");
+    }
   }
 }
 
