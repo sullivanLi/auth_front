@@ -1,3 +1,4 @@
+var debug = process.env.NODE_ENV !== "production";
 var path = require('path');
 var srcPath = path.join(__dirname, 'src');
 var buildPath = path.join(__dirname, 'dist');
@@ -28,7 +29,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [
+  plugins: debug ? [
     extractCSS
+  ] : [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ]
 };
